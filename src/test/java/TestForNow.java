@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.techcenture.driver.Driver;
 import com.techcenture.pageobject.HomePage;
+import com.techcenture.pageobject.Product;
 
 public class TestForNow {
 	
@@ -13,6 +14,8 @@ public class TestForNow {
 		driver = Driver.getDriver("Chrome");
 		
 		HomePage homePage = new HomePage(driver);
+		
+		Product product = new Product(driver);
 		
 		
 		//Go to home page
@@ -33,11 +36,21 @@ public class TestForNow {
 		homePage.clickProductMoreBtn("Blouse");
 		//clickBtnBlouseMore(); 
 		
-		//You will be taken to product page (so optionally you can create a product page)
-		//Verify Item information such as name, 
-		//condition, and 
-		//description
 		
+		//Verify Item information such as name, 
+		//product.verify_item_info();
+		
+		product.social_media_buttons();
+		
+		//product.quantySizeColor(2, "white");
+		
+		product.productSelection(2, "M", "White");
+		
+		product.verifyAndClickCart();
+		
+		product.verifyPopUpWindow();
+		
+		product.verifyTotalPrice();
 		
 		//Close the browser
 		//driver.quit();
