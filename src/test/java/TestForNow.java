@@ -51,7 +51,11 @@ public class TestForNow {
 		product.verifyPopUpWindow();
 		
 		product.verifyTotalPrice();
-		
+
+		product.verifyTotalPriceShipping();
+
+
+
 		//Close the browser
 		Driver.quitBrowser();
 		

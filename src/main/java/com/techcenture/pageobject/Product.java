@@ -56,7 +56,13 @@ public class Product {
 	
 	@FindBy (id = "layer_cart_product_price")
 	private WebElement total;
-	
+
+	@FindBy (xpath = "//span[@class='ajax_block_cart_total']")
+	private WebElement totalWithShipping;
+
+	@FindBy (xpath = "//span[@class='ajax_cart_shipping_cost']")
+	private WebElement shipping;
+
 	String pricePerItem= "";
 	
 	
@@ -134,16 +140,32 @@ public class Product {
 		System.out.println(checkInsidewindows);
 		
 	}
-	
-	public void verifyTotalPrice() {
-		
+
+	public double calPrice(){
 		String quantity = quantityOfSelectedItem.getText(); // 2
 		double totalPrice = Integer.parseInt(quantity) * Double.parseDouble(pricePerItem); //54.0
-		
+
+		//	String totPrice =  String.valueOf(totalPrice);
+		return totalPrice;
+
+	}
+
+	public void verifyTotalPrice() {
+
 	//	String totPrice =  String.valueOf(totalPrice);
 		double actualTotal = Double.parseDouble(total.getText().replace("$", ""));
 		
-		assertEquals(totalPrice, actualTotal );
+		assertEquals(calPrice(), actualTotal );
+	}
+
+	//Verify total price + shipping
+	public void verifyTotalPriceShipping() {
+		double shippingTotal = Double.parseDouble(shipping.getText().replace("$", ""));
+
+		double actualShippingTotal = Double.parseDouble(totalWithShipping.getText().replace("$", ""));
+		double totalWithShipping = shippingTotal+calPrice();
+
+		assertEquals(totalWithShipping, actualShippingTotal );
 	}
 
 	
