@@ -53,7 +53,7 @@ public class TestForNow {
 		product.verifyTotalPrice();
 		
 		//Close the browser
-		//driver.quit();
+		Driver.quitBrowser();
 		
 	}
 
