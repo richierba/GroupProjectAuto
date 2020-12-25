@@ -84,6 +84,7 @@ public class Product {
 		}
 		System.out.println("Buttons verified");
 	}
+
 	
 	private void changeProductQuantity(int amount) throws InterruptedException {
 	
@@ -206,5 +207,8 @@ public class Product {
 //			}
 //		}
 //	}
+	
+
+	
 	
 }
