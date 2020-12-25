@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import static java.lang.Double.parseDouble;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Iterator;
@@ -62,6 +63,9 @@ public class Product {
 
 	@FindBy (xpath = "//span[@class='ajax_cart_shipping_cost']")
 	private WebElement shipping;
+
+	@FindBy (xpath = "//div[@class='button-container']//i[@class='icon-chevron-right right']")
+	private WebElement btnProceedToCheckout;
 
 	String pricePerItem= "";
 	
@@ -143,7 +147,7 @@ public class Product {
 
 	public double calPrice(){
 		String quantity = quantityOfSelectedItem.getText(); // 2
-		double totalPrice = Integer.parseInt(quantity) * Double.parseDouble(pricePerItem); //54.0
+		double totalPrice = Integer.parseInt(quantity) * parseDouble(pricePerItem); //54.0
 
 		//	String totPrice =  String.valueOf(totalPrice);
 		return totalPrice;
@@ -153,19 +157,29 @@ public class Product {
 	public void verifyTotalPrice() {
 
 	//	String totPrice =  String.valueOf(totalPrice);
-		double actualTotal = Double.parseDouble(total.getText().replace("$", ""));
+		double actualTotal = parseDouble(total.getText().replace("$", ""));
 		
 		assertEquals(calPrice(), actualTotal );
 	}
 
 	//Verify total price + shipping
 	public void verifyTotalPriceShipping() {
-		double shippingTotal = Double.parseDouble(shipping.getText().replace("$", ""));
+		double shippingTotal = parseDouble(shipping.getText().replace("$", ""));
 
-		double actualShippingTotal = Double.parseDouble(totalWithShipping.getText().replace("$", ""));
+		double actualShippingTotal = parseDouble(totalWithShipping.getText().replace("$", ""));
 		double totalWithShipping = shippingTotal+calPrice();
 
 		assertEquals(totalWithShipping, actualShippingTotal );
+	}
+
+	public void clickBtnProceedToCheckout(){
+		btnProceedToCheckout.click();
+	}
+
+	public double getShipingCost(){
+		double shippingTotal = parseDouble(shipping.getText().replace("$", ""));
+
+		return shippingTotal;
 	}
 
 	
