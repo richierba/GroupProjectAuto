@@ -76,8 +76,14 @@ public class Tabs {
             "Bank wire account information will be displayed on the next page",
             "Please confirm your order by clicking \"I confirm my order.\"."};
 
-    @FindBy (xpath = "//div[@class='box']//br")
-    List<WebElement> paymentText;
+    @FindBy (xpath = "//div[@class='box']")
+    private WebElement paymentText;
+
+    @FindBy (xpath = "//div[@class='box']/text()[11]")
+    private WebElement refNum;
+
+    @FindBy (xpath = "//a[@title='Back to orders']")
+    private WebElement btnBackToOrders;
 
     String[] actualPaymentText = {"Please send us a bank wire with",
             "Amount",
@@ -87,6 +93,15 @@ public class Tabs {
             "Do not forget to insert your order reference ACYELRQTX in the subject of your bank wire",
             "Your order will be sent as soon as we receive payment.",
             "If you have questions, comments or concerns, please contact our expert customer support team"};
+
+    @FindBy (xpath = "//table[@id='order-list']/tbody/tr[1]//a[@class='color-myaccount']")
+    private WebElement orderRefId;
+
+    @FindBy (xpath = "//table[@id='order-list']/tbody/tr[1]//span[@class='label dark']")
+    private WebElement orderStatus;
+
+    @FindBy (xpath = "//a[@class='logout']")
+    private WebElement signOut;
 
     public Tabs(WebDriver driver){
         this.driver = driver;
@@ -178,11 +193,34 @@ public class Tabs {
     }
 
     public void verifyPaymentText(){
-        for(int i = 0; i< paymentText.size();i++){
+        paymentText.isDisplayed()  ;
+        System.out.println("Payment Text Displayed");
 
-            assertEquals(actualPaymentText[i],paymentText.get(i).getText());
+    }
 
-        }
+    public String getRefNum(){
+        String refNumber = paymentText.getText();
+        String[] splitAtRef= paymentText.getText().split("reference");
+
+        refNumber = splitAtRef[1].trim().substring(0,9);
+
+        return refNumber;
+    }
+
+    public void clickBtnBackToOrders(){
+        btnBackToOrders.click();
+    }
+
+    public void verifyOrderRefId(String acutalID){
+        assertEquals(orderRefId.getText().trim(),acutalID);
+    }
+
+    public void verifyOrderStatus(String orderStat){
+        assertEquals(orderStatus.getText().trim(),orderStat);
+    }
+
+    public void clickSignOut(){
+        signOut.click();
     }
 
 }

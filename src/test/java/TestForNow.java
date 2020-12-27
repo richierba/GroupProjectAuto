@@ -117,13 +117,20 @@ public class TestForNow {
 		tab.clickBtnIConfirmMyOrder();
 
 		//Verify confirmation
-		//tab.verifyPaymentText();
+		tab.verifyPaymentText();
 
 		//Copy the order reference and click back to orders (it will take you to order history)
-		//Compare the order reference and verify it is the same value
-		// Verify the status is On backorder
-		//Log out
+		String refNum = tab.getRefNum();
+		tab.clickBtnBackToOrders();
 
+		//Compare the order reference and verify it is the same value
+		tab.verifyOrderRefId(refNum);
+
+		// Verify the status is On backorder
+		tab.verifyOrderStatus("On backorder");
+
+		//Log out
+		tab.clickSignOut();
 
 		//Close the browser
 		Driver.quitBrowser();
