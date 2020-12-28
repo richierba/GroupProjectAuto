@@ -96,7 +96,7 @@ public class Product {
 	}
 
 	
-	private void changeProductQuantity(int amount) throws InterruptedException {
+	public void changeProductQuantity(int amount) throws InterruptedException {
 	
 		for(int i = 1; i<amount; i++) {
 			increaseQuantity.click();

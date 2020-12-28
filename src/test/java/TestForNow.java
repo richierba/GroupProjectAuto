@@ -40,7 +40,9 @@ public class TestForNow {
 		//product.verify_item_info();
 		
 		product.social_media_buttons();
-		
+
+		product.productSelection(2,"M", "White");
+
 		//product.quantySizeColor(2, "white");
 		
 		product.productSelection(2, "M", "White");

@@ -98,6 +98,8 @@ public class Tabs {
 	@FindBy(xpath = "//table[@id='order-list']/tbody/tr[1]//a[@class='color-myaccount']")
 	private WebElement orderRefId;
 
+    //String actualPaymentText;
+
 	@FindBy(xpath = "//table[@id='order-list']/tbody/tr[1]//span[@class='label dark']")
 	private WebElement orderStatus;
 
@@ -126,8 +128,19 @@ public class Tabs {
 				.findElement(By.xpath("//ul[@id='order_step']/li[contains(@class,'step_current')]/span"));
 		String tabString = currentTabTxt.getText().trim();
 		assertTrue(tabString.contains(tabName));
+	}
+
+    public void verifyAllTabs(String tabName){
+        assertEquals(tabName, driver.findElements(By.xpath("//span[text()=\' "+tabName+"\']")));
+    }
+
+    public void verifyTabSummary(String summaryTitle){
+        assertEquals(tabSummary.getText(),summaryTitle);
+
 
 		//To verify tab value is white while active
+		WebElement currentTabTxt = driver
+				.findElement(By.xpath("//ul[@id='order_step']/li[contains(@class,'step_current')]/span"));
 		String color = currentTabTxt.getCssValue("color");
 		String hex = Color.fromString(color).asHex();
 
@@ -135,9 +148,9 @@ public class Tabs {
 
 	}
 
-	public void verifyTabSummary(String summaryTitle) {
-		verifyCurrentTab(summaryTitle);
-	}
+//	public void verifyTabSummary(String summaryTitle) {
+//		verifyCurrentTab(summaryTitle);
+//	}
 
 	public void verifyTabSignIn(String signInTitle) {
 		verifyCurrentTab(signInTitle);
@@ -211,6 +224,11 @@ public class Tabs {
 		btnPayByBankWire.click();
 	}
 
+    public void verifyPaymentText() {
+		paymentText.isDisplayed();
+		//assertEquals(actualPaymentText,paymentText.getText());
+		System.out.println("Payment Text Displayed");
+	}
 	public void verifyPayBankWireText() {
 		for (int i = 0; i < payBankWireText.size(); i++) {
 			// assertEquals(bankWireText[i], payBankWireText.get(i).getText());
@@ -219,39 +237,65 @@ public class Tabs {
 		}
 	}
 
-	public void clickBtnIConfirmMyOrder() {
-		btnIConfirmMyOrder.click();
-	}
+		public String getRefNum () {
+			String refNumber = paymentText.getText();
+			//System.out.println(paymentText.getText());
+			String[] splitAtRef = paymentText.getText().split("reference");
+			refNumber = splitAtRef[1].trim().substring(0, 9);
 
-	public void verifyPaymentText() {
-		paymentText.isDisplayed();
-		System.out.println("Payment Text Displayed");
+			return refNumber;
 
-	}
+		}
+			public void clickBtnIConfirmMyOrder () {
+				btnIConfirmMyOrder.click();
+			}
 
-	public String getRefNum() {
-		String refNumber = paymentText.getText();
-		String[] splitAtRef = paymentText.getText().split("reference");
+//			public void verifyPaymentText () {
+//				paymentText.isDisplayed();
+//				System.out.println("Payment Text Displayed");
+//
+//			}
 
-		refNumber = splitAtRef[1].trim().substring(0, 9);
+//			public String getRefNum () {
+//				String refNumber = paymentText.getText();
+//				String[] splitAtRef = paymentText.getText().split("reference");
+//
+//				refNumber = splitAtRef[1].trim().substring(0, 9);
+//
+//				return refNumber;
+//			}
 
-		return refNumber;
-	}
+			public void clickBtnBackToOrders () {
+				btnBackToOrders.click();
+			}
 
-	public void clickBtnBackToOrders() {
-		btnBackToOrders.click();
-	}
+			public void verifyOrderRefId (String acutalID){
+				assertEquals(orderRefId.getText().trim(), acutalID);
+			}
 
-	public void verifyOrderRefId(String acutalID) {
-		assertEquals(orderRefId.getText().trim(), acutalID);
-	}
+			public void verifyOrderStatus (String orderStat){
+				assertEquals(orderStatus.getText().trim(), orderStat);
+			}
 
-	public void verifyOrderStatus(String orderStat) {
-		assertEquals(orderStatus.getText().trim(), orderStat);
-	}
 
-	public void clickSignOut() {
-		signOut.click();
-	}
+			public void clickSignOut () {
+				signOut.click();
+			}
+
+			public void setActualPaymentText (String refNum){
+//        actualPaymentText = "Your order on My Store is complete.\n Please send us a bank wire with\n"+
+//                "- Amount $56.00\n"+
+//                "- Name of account owner Pradeep Macharla\n" +
+//                "- Include these details xyz\n" +
+//                "- Bank name RTP\n" +
+//                "- Do not forget to insert your order reference "+refNum+" in the subject of your bank wire.\n" +
+//                "An email has been sent with this information.\n" +
+//                "Your order will be sent as soon as we receive payment.\n" +
+//                "If you have questions, comments or concerns, please contact our expert customer support team. .";
+			}
+//    public void clickSignOut(){
+//        signOut.click();
+//    }
+
 
 }

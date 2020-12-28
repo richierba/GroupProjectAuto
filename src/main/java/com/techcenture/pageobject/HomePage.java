@@ -46,7 +46,7 @@ public class HomePage {
 		int size = bestSellersProduct.size();
 
 		assertEquals("7", String.valueOf(size));
-		System.out.println("Successful");
+		System.out.println("Verified Best Sellers");
 
 	}
 
@@ -63,7 +63,7 @@ public class HomePage {
 
 		}
 
-		System.out.println("Successful Next");
+		System.out.println("Verified best Sellers Name");
 	}
 
 	public void clickBtnBlouseMore() throws InterruptedException {
