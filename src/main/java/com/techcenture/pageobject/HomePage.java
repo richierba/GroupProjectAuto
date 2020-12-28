@@ -33,6 +33,7 @@ public class HomePage {
 	public void visitHomePage() {
 		String homeUrl = ConfigReader.getProperty("homeurl");
 		driver.get(homeUrl);
+		System.out.println("Navigate to home page");
 	}
 	
 	

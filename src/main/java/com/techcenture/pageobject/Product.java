@@ -120,6 +120,8 @@ public class Product {
 		changeProductQuantity(amount);
 		selectProductSize(s);
 		selectProductColor(color);
+
+		System.out.println("Products Selected");
 	}
 	
 	public void verifyAndClickCart() {
@@ -160,6 +162,7 @@ public class Product {
 		double actualTotal = parseDouble(total.getText().replace("$", ""));
 		
 		assertEquals(calPrice(), actualTotal );
+		System.out.println("Total Price Verified");
 	}
 
 	//Verify total price + shipping
@@ -170,6 +173,7 @@ public class Product {
 		double totalWithShipping = shippingTotal+calPrice();
 
 		assertEquals(totalWithShipping, actualShippingTotal );
+		System.out.println("Verified Total price With Shipping");
 	}
 
 	public void clickBtnProceedToCheckout(){

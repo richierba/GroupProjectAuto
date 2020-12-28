@@ -146,6 +146,8 @@ public class Tabs {
 
 		assertEquals("#ffffff", hex);
 
+		System.out.println("Verified Summary Tab");
+
 	}
 
 //	public void verifyTabSummary(String summaryTitle) {
@@ -173,6 +175,7 @@ public class Tabs {
 	public void verifyImgDelete() {
 		Boolean display = imgDelete.isDisplayed();
 		assertEquals(display, true);
+		System.out.println("Verified Delete Image");
 
 	}
 
@@ -206,6 +209,7 @@ public class Tabs {
 	public void verifySelectRadioBtnShipping() {
 		boolean radioBtn = radioBtnShipping.isSelected();
 		assertEquals(radioBtn, true);
+		System.out.println("Verified radio button is selected");
 	}
 
 	public void clickTermsOfCond() {
@@ -235,6 +239,8 @@ public class Tabs {
 			assertEquals(payBankWireText.get(i).getText(), bankWireText[i]);
 
 		}
+
+		System.out.println("Verified bank wire text");
 	}
 
 		public String getRefNum () {
@@ -271,10 +277,12 @@ public class Tabs {
 
 			public void verifyOrderRefId (String acutalID){
 				assertEquals(orderRefId.getText().trim(), acutalID);
+				System.out.println("Verifed order ref ID");
 			}
 
 			public void verifyOrderStatus (String orderStat){
 				assertEquals(orderStatus.getText().trim(), orderStat);
+				System.out.println("Verified order status");
 			}
 
 

@@ -44,8 +44,7 @@ public class TestForNow {
 		product.productSelection(2,"M", "White");
 
 		//product.quantySizeColor(2, "white");
-		
-		product.productSelection(2, "M", "White");
+		//product.productSelection(2, "M", "White");
 		
 		product.verifyAndClickCart();
 		
