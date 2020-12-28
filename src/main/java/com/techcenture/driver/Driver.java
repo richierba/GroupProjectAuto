@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import com.techcenture.utils.ConfigReader;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Driver {
@@ -16,9 +18,10 @@ public class Driver {
 			
 		}
 		
-		public static WebDriver getDriver(String driverOption) {
+		public static WebDriver getDriver() {
 			
 			System.out.println("Instantiating the browser instance");
+			String driverOption = ConfigReader.getProperty("browser");
 			switch (driverOption.toLowerCase()) {
 				
 			case "chrome":

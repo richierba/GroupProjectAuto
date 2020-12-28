@@ -10,6 +10,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.techcenture.utils.ConfigReader;
+
 public class HomePage {
 
 	private WebDriver driver;
@@ -28,6 +30,12 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 
+	public void visitHomePage() {
+		String homeUrl = ConfigReader.getProperty("homeurl");
+		driver.get(homeUrl);
+	}
+	
+	
 	public void clickBtnBestSellers() throws InterruptedException {
 		BtnBestSellers.click();
 		Thread.sleep(2000);

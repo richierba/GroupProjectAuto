@@ -11,18 +11,14 @@ public class TestForNow {
 	@Test
 	public void EndToEnd() throws InterruptedException {
 		
-		WebDriver driver=null;
-		driver = Driver.getDriver("Chrome");
-		
+		WebDriver driver = Driver.getDriver();
 		HomePage homePage = new HomePage(driver);
-		
 		Product product = new Product(driver);
-
 		Tabs tab = new Tabs(driver);
 		
 		
 		//Go to home page
-		driver.get("http://automationpractice.com/index.php");
+		homePage.visitHomePage();
 		
 		//Scroll down to best sellers
 		//Click best sellers
@@ -68,6 +64,7 @@ public class TestForNow {
 		String[] tabNames = tab.getTabNames();
 
 		//Verify you are under summary tab
+			
 		tab.verifyTabSummary(tabNames[0]);
 
 		//Verify Delete option is available but don’t click it
@@ -76,15 +73,12 @@ public class TestForNow {
 		//Click Proceed to Checkout
 		tab.clickBtnProceedToCheckOut();
 
-		//jakes@yahoo.com    jakes123
-		//Sign in
-		tab.typeEmail("jakes@yahoo.com");
-		tab.typePassword("jakes123");
-
 		//Verify you are under tab Sign in
 		tab.verifyTabSignIn(tabNames[1]);
 
-		tab.clickBtnSignIn();
+		//jakes@yahoo.com    jakes123
+		//Sign in
+		tab.signIn();
 
 		// Verify You are under Address tab
 		tab.verifyTabAddress(tabNames[2]);
